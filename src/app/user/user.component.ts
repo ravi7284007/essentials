@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, computed, input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, computed, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -9,10 +9,14 @@ import { Component, EventEmitter, Input, Output, computed, input } from '@angula
 })
 
 export class UserComponent {
+  // Get data from Parent component
   @Input({required: true}) id!: string;
   @Input({required: true}) avatar!: string;
   @Input({required: true}) name!: string;
-  @Output() select = new EventEmitter()
+  
+  // Send data child to parent component with initiator EventEmitter()
+  @Output() select = new EventEmitter();
+  
 
   // Signal.js since Angular 16
   // avatar = input.required<string>();
