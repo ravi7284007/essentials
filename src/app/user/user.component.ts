@@ -10,13 +10,20 @@ import { Component, EventEmitter, Input, Output, computed, input, output } from 
 
 export class UserComponent {
   // Get data from Parent component
-  @Input({required: true}) id!: string;
-  @Input({required: true}) avatar!: string;
-  @Input({required: true}) name!: string;
+  // @Input({required: true}) id!: string;
+  // @Input({required: true}) avatar!: string;
+  // @Input({required: true}) name!: string;
+
+  @Input({required: true}) user!: {
+    id: string;
+    avatar: string;
+    name: string;
+  }
   
   // Send data child to parent component with initiator EventEmitter()
-  @Output() select = new EventEmitter();
-  
+  @Output() select = new EventEmitter<string>();
+
+  // select = output<string>();
 
   // Signal.js since Angular 16
   // avatar = input.required<string>();
@@ -25,10 +32,10 @@ export class UserComponent {
   // imagePath = computed(() => `assets/users/${this.avatar()}`)
   
   get imagePath(){
-    return `assets/users/${this.avatar}`;
+    return `assets/users/${this.user.avatar}`;
   }
 
   onSelectUser(){ 
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
 }
