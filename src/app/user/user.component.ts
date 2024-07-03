@@ -15,6 +15,7 @@ export class UserComponent {
   // @Input({required: true}) name!: string;
 
   @Input({required: true}) user!: User;
+  @Input({required: true}) selected!: boolean;
   
   // Send data child to parent component with initiator EventEmitter()
   @Output() select = new EventEmitter<string>();
