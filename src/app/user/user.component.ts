@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, computed, input, output } from '@angular/core';
-
+import { User } from './user.model';
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -14,11 +14,7 @@ export class UserComponent {
   // @Input({required: true}) avatar!: string;
   // @Input({required: true}) name!: string;
 
-  @Input({required: true}) user!: {
-    id: string;
-    avatar: string;
-    name: string;
-  }
+  @Input({required: true}) user!: User;
   
   // Send data child to parent component with initiator EventEmitter()
   @Output() select = new EventEmitter<string>();
