@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
 import { TaskComponent } from "./task/task.component";
 import { dummyTasks } from "../data/dummy-users";
-
+import { NewTaskComponent } from "./new-task/new-task.component";
+import { NewTaskData } from "./task/task.model";
 @Component({
     selector: 'app-tasks',
     standalone: true,
-    imports: [TaskComponent],
+    imports: [TaskComponent, NewTaskComponent],
     templateUrl: './tasks.component.html',
     styleUrl: './tasks.component.css'
 })
@@ -13,6 +14,8 @@ import { dummyTasks } from "../data/dummy-users";
 export class TasksComponent{
     @Input({required: true}) name?: string;
     @Input({required: true}) userId!: string;
+    isAddingTask = false;
+    
     tasks = dummyTasks;
 
     get selectedUserTasks(){
@@ -21,5 +24,24 @@ export class TasksComponent{
 
     onCompleteTask(id: string){
         this.tasks = this.tasks.filter(task => task.id !== id)
+    }
+
+    onStartAddTask(){
+        this.isAddingTask = true;
+    }
+
+    onCancelAddTask(){
+        this.isAddingTask = false;
+    }
+
+    onAddTask(taskData: NewTaskData){
+        this.tasks.push({
+            id: Math.random().toString(),
+            userId: this.userId,
+            title: taskData.title,
+            summary: taskData.summary,
+            dueDate: taskData.date,
+        })
+        this.isAddingTask = false;
     }
 }
